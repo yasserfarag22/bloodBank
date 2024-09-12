@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
     Route::delete('contacts/{id}', [ContactController::class, 'delete'])->name('contacts.delete');
     Route::get('donations', [DonationController::class, 'index'])->name('donations.index');
+    Route::get('donations', [DonationController::class, 'index'])->name('donations.index');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
