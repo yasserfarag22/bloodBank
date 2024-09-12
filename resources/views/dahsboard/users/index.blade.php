@@ -4,7 +4,6 @@
     <link href="{{ URL::asset('assets/plugins/morris.js/morris.css') }}" rel="stylesheet" />
 @endsection
 @section('page-header')
-    <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
@@ -13,7 +12,6 @@
             </div>
         </div>
     </div>
-    <!-- /breadcrumb -->
 @endsection
 @section('content')
     <div class="col-xl-12">
