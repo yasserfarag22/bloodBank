@@ -22,6 +22,6 @@ class UsersTableSeeder extends Seeder
         );
 
         
-        $user->syncRoles(['super_admin']);
+   
     }
 }

@@ -1,17 +1,20 @@
-<!--Horizontal-main -->
+<!-- Horizontal-main -->
 <div class="sticky">
     <div class="horizontal-main hor-menu clearfix side-header">
         <div class="horizontal-mainwrapper container clearfix">
-            <!--Nav-->
+            <!-- Nav -->
             <nav class="horizontalMenu clearfix">
                 <ul class="horizontalMenu-list">
                     <!-- Dashboard -->
-                    <li aria-haspopup="true"><a href="{{ url('dashboard') }}" class="">
+                    <li aria-haspopup="true">
+                        <a href="{{ url('dashboard') }}">
                             <i class="fe fe-home side-menu__icon"></i>الرئيسية
-                        </a></li>
+                        </a>
+                    </li>
 
                     <!-- Categories -->
-                    <li aria-haspopup="true"><a href="{{ route('categories.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('categories.index') }}" class="sub-icon">
                             <i class="fe fe-tag side-menu__icon"></i> الأقسام<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
                         </a>
@@ -22,7 +25,8 @@
                     </li>
 
                     <!-- Posts -->
-                    <li aria-haspopup="true"><a href="{{ route('posts.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('posts.index') }}" class="sub-icon">
                             <i class="fe fe-file-text side-menu__icon"></i> المقالات<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
                         </a>
@@ -33,7 +37,8 @@
                     </li>
 
                     <!-- Governorates -->
-                    <li aria-haspopup="true"><a href="{{ route('governorates.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('governorates.index') }}" class="sub-icon">
                             <i class="fe fe-map-pin side-menu__icon"></i> المحافظات<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
                         </a>
@@ -44,7 +49,8 @@
                     </li>
 
                     <!-- Cities -->
-                    <li aria-haspopup="true"><a href="{{ route('cities.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('cities.index') }}" class="sub-icon">
                             <i class="fe fe-briefcase side-menu__icon"></i> المدن<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
                         </a>
@@ -55,32 +61,50 @@
                     </li>
 
                     <!-- Settings -->
-                    <li aria-haspopup="true"><a href="{{ route('settings.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('settings.index') }}" class="sub-icon">
                             <i class="fe fe-settings side-menu__icon"></i> الأعدادات
-                        </a></li>
+                        </a>
+                    </li>
 
                     <!-- Contacts -->
-                    <li aria-haspopup="true"><a href="{{ route('contacts.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('contacts.index') }}" class="sub-icon">
                             <i class="fe fe-mail side-menu__icon"></i> الرسائل الوارده
-                        </a></li>
+                        </a>
+                    </li>
 
                     <!-- Donations -->
-                    <li aria-haspopup="true"><a href="{{ route('donations.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('donations.index') }}" class="sub-icon">
                             <i class="fe fe-heart side-menu__icon"></i> طلبات التبرع
-                        </a></li>
+                        </a>
+                    </li>
 
                     <!-- Clients -->
-                    <li aria-haspopup="true"><a href="{{ route('clients.index') }}" class="sub-icon">
+                    <li aria-haspopup="true">
+                        <a href="{{ route('clients.index') }}" class="sub-icon">
                             <i class="fe fe-users side-menu__icon"></i> العملاء
-                        </a></li>
-                    <!-- users -->
-                    <li aria-haspopup="true"><a href="{{ route('users.index') }}" class="sub-icon">
-                            <i class="fe fe-users side-menu__icon"></i> العملاء
-                        </a></li>
+                        </a>
+                    </li>
+
+                    <!-- Users -->
+                    <li aria-haspopup="true">
+                        <a href="{{ route('users.index') }}" class="sub-icon">
+                            <i class="fe fe-users side-menu__icon"></i> المشرفين
+                        </a>
+                    </li>
+
+                    <!-- Roles (Modified) -->
+                    <li aria-haspopup="true">
+                        <a href="{{ route('roles.index') }}" class="sub-icon">
+                            <i class="fe fe-star side-menu__icon"></i> الرتب
+                        </a>
+                    </li>
                 </ul>
             </nav>
-            <!--Nav-->
+            <!-- Nav -->
         </div>
     </div>
 </div>
-<!--Horizontal-main -->
+<!-- Horizontal-main -->
