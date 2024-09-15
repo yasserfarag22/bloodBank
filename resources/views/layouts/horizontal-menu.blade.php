@@ -46,10 +46,14 @@
                             <li aria-haspopup="true"><a href="{{ route('governorates.create') }}" class="slide-item">أضف
                                     محافظه</a></li>
                         </ul>
+                        <ul class="sub-menu">
+                            <li aria-haspopup="true"><a href="{{ route('cities.index') }}" class="slide-item">
+                                    المدن</a></li>
+                        </ul>
                     </li>
 
                     <!-- Cities -->
-                    <li aria-haspopup="true">
+                    {{-- <li aria-haspopup="true">
                         <a href="{{ route('cities.index') }}" class="sub-icon">
                             <i class="fe fe-briefcase side-menu__icon"></i> المدن<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
@@ -58,7 +62,7 @@
                             <li aria-haspopup="true"><a href="{{ route('cities.create') }}" class="slide-item">أضف
                                     المدينه</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                     <!-- Settings -->
                     <li aria-haspopup="true">

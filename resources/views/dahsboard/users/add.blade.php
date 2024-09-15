@@ -1,5 +1,8 @@
+@inject('role', 'App\Models\Role')
 @extends('layouts.master')
-
+<?php
+$roles = $role->pluck('display_name', 'id')->toArray();
+?>
 @section('css')
     <!-- Morris.js Charts Plugin -->
     <link href="{{ URL::asset('assets/plugins/morris.js/morris.css') }}" rel="stylesheet" />
@@ -36,34 +39,31 @@
                     @csrf
                     <div class="form-group">
                         <label for="inputName">اسم المشرف</label>
-                        <input type="text" class="form-control" name="name" id="inputName" placeholder="اسم المشرف"
-                            required>
+                        <input type="text" class="form-control" name="name" id="inputName" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputEmail">البريد الإلكتروني</label>
-                        <input type="email" class="form-control" name="email" id="inputEmail"
-                            placeholder="البريد الإلكتروني" required>
+                        <input type="email" class="form-control" name="email" id="inputEmail" required>
                     </div>
 
                     <div class="form-group">
                         <label for="inputPassword">كلمة المرور</label>
-                        <input type="password" class="form-control" name="password" id="inputPassword"
-                            placeholder="كلمة المرور" required>
+                        <input type="password" class="form-control" name="password" id="inputPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword"> تأكيد كلمة المرور </label>
+                        <input type="password" class="form-control" name="password_confirmation" id="inputPassword"
+                            required>
                     </div>
 
                     <div class="form-group">
-                        <label for="permissions">الصلاحيات</label>
-                        <div id="permissions">
-                            @foreach ($roles as $role)
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="roles[]"
-                                        value="{{ $role->id }}" id="role{{ $role->id }}">
-                                    <label class="form-check-label"
-                                        for="role{{ $role->id }}">{{ $role->name }}</label>
-                                </div>
+                        <label for="roles_list">رتب المستخدمين</label>
+                        <select name="roles_list[]" class="form-control select2" multiple="multiple" id="roles_list">
+                            @foreach ($roles as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
                             @endforeach
-                        </div>
+                        </select>
                     </div>
 
                     <div class="form-group mb-0 mt-3 justify-content-end">

@@ -1,4 +1,5 @@
 @inject('perm', 'App\Models\Permission')
+@inject('role', 'App\Models\Role')
 @extends('layouts.master')
 
 @section('css')
@@ -55,12 +56,12 @@
                         <label for="select-all">اختيار الكل</label>
                         <br>
                         <div class="row">
-                            @foreach ($permissions as $permission)
+                            @foreach ($perm->all() as $permission)
                                 <div class="col-sm-3">
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="permissions_list[]" value="{{ $permission->id }}"
-                                                {{ old('permissions_list') && in_array($permission->id, old('permissions_list')) ? 'checked' : '' }}>
+                                                @if ($role->hasPermission($permission->name)) checked @endif>
                                             {{ $permission->display_name }}
                                         </label>
                                     </div>

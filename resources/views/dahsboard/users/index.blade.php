@@ -31,7 +31,7 @@
                                 <th>#</th>
                                 <th>الاسم</th>
                                 <th>البريد الإلكتروني</th>
-                                <th>الصلاحية</th>
+                                <th>الرتبة</th>
                                 <th class="text-center">تعديل</th>
                                 <th class="text-center">حذف</th>
                             </tr>
@@ -42,11 +42,19 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-
+                                    <td class="text-center">
+                                        @foreach ($user->roles as $role)
+                                            <span class="badge badge-success">
+                                                {{ $role->display_name }}
+                                            </span>
+                                        @endforeach
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success btn-xs">
                                             <i class="fa fa-edit"></i>
                                         </a>
+
+
                                     </td>
                                     <td class="text-center">
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST"

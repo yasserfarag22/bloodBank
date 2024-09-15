@@ -23,8 +23,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles=Permission::all();
-        return view('dahsboard.users.add',compact('roles'));
+       
+        return view('dahsboard.users.add');
     }
 
     /**
@@ -32,7 +32,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'password' => 'required|confirmed',
+            'email' => 'required|email',
+            'roles_list' => 'required'
+        ];
+        
+        $messages = [
+            'name.required' => 'الاسم مطلوب',
+            'password.required' => 'كلمة السر مطلوبة',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'البريد الإلكتروني غير صالح',
+            'roles_list.required' => 'الرتب مطلوبة',
+            'password.confirmed' => 'كلمة السر غير متطابقة',
+        ];
+        
+        $this->validate($request, $rules, $messages);
+        
+        $request->merge(['password'=>bcrypt($request->password)]);
+        $user=User::create($request->except('roles_list'));
+        $user->roles()->attach($request->input('roles_list'));
+        return redirect(route('users.index'))->with('success','تم الاضافه بنجاح');
+
     }
 
     /**
@@ -40,7 +62,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+       
     }
 
     /**
@@ -48,7 +70,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user=User::findOrFail($id);
+        return view('dahsboard.users.edit',compact('user'));
     }
 
     /**
@@ -56,7 +79,31 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $rules = [
+    'name' => 'required',
+    'password' => 'required|confirmed',
+    'email' => 'required|email',
+    'roles_list' => 'required'
+];
+
+$messages = [
+    'name.required' => 'الاسم مطلوب',
+    'password.required' => 'كلمة السر مطلوبة',
+    'password.confirmed' => 'كلمة السر ليست متطابقة',
+    'email.required' => 'الإيميل مطلوب',
+    'email.email' => 'يجب إدخال بريد إلكتروني صحيح',
+    'roles_list.required' => 'الرتب مطلوبة'
+];
+
+$this->validate($request, $rules, $messages);
+
+        
+        $user=User::findOrFail($id);
+        $user->roles()->sync($request->input('roles_list'));
+        $request->merge(['password'=>bcrypt($request->password)]);
+        $user->update($request->all());
+         return redirect(route('users.index'))->with('success','تم التحديث بنجاح');
+
     }
 
     /**
@@ -64,6 +111,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user=User::findOrFail($id);
+        $user->delete();
+        return back();
     }
 }

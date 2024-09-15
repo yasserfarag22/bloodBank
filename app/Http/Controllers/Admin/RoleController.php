@@ -47,10 +47,7 @@ class RoleController extends Controller
         ];
         $this->validate($request, $rules, $messages);
 
-        $role = Role::create([
-            'name' => $request->name,
-            'display_name' => $request->display_name
-        ]);
+        $role = Role::create($request->all());
 
         $role->permissions()->attach($request->permissions_list);
 
@@ -64,7 +61,8 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
-        return view('dahsboard.roles.edit', compact('role', 'permissions'));
+        $rolePermissions=$role->permissions->pluck('id')->toArray();
+        return view('dahsboard.roles.edit', compact('role', 'permissions','rolePermissions'));
     }
 
     /**
@@ -72,6 +70,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+       
         $rules = [
             'name' => 'required|string|max:255',
             'display_name' => 'required|string',
@@ -88,10 +87,7 @@ class RoleController extends Controller
         $this->validate($request, $rules, $messages);
 
         $role = Role::findOrFail($id);
-        $role->update([
-            'name' => $request->name,
-            'display_name' => $request->display_name
-        ]);
+        $role->update($request->all());
         $role->permissions()->sync($request->permissions_list);
 
         return redirect(route('roles.index'))->with('success', 'تم التعديل بنجاح');

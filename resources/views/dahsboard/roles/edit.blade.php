@@ -22,7 +22,7 @@
         <div class="card  box-shadow-0">
             <div class="card-header">
                 <h4 class="card-title mb-1"> تعديل علي رتبه </h4>
-                <h5 class="card-title mb-1"> {{ $category->name }}</h5>
+                <h5 class="card-title mb-1"> {{ $role->display_name }}</h5>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -34,17 +34,48 @@
             <div class="card-body pt-0">
                 <form action="{{ route('roles.update', $role->id) }}" method="POST" class="form-horizontal">
                     @csrf
-                    @method('put')
+                    @method('PUT')
+
                     <div class="form-group">
-                        <input type="text" class="form-control" name="name" id="inputName" placeholder="الأسم الجديد">
+                        <label for="inputName">اسم الرتبة</label>
+                        <input type="text" class="form-control" name="name" id="inputName"
+                            placeholder="ادخل اسم الرتبة" value="{{ old('name', $role->name) }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputDisplayName">الاسم المعروض</label>
+                        <input type="text" class="form-control" name="display_name" id="inputDisplayName"
+                            placeholder="ادخل الاسم المعروض" value="{{ old('display_name', $role->display_name) }}"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="permissions">الصلاحيات</label><br>
+                        <input id="select-all" type="checkbox" onclick="toggleCheckboxes(this)">
+                        <label for="select-all">اختيار الكل</label>
+                        <br>
+                        <div class="row">
+                            @foreach ($permissions as $permission)
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="permissions_list[]" value="{{ $permission->id }}"
+                                                {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}>
+                                            {{ $permission->display_name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="form-group mb-0 mt-3 justify-content-end">
                         <div>
-                            <button type="submit" class="btn btn-primary">تعديل</button>
+                            <button type="submit" class="btn btn-primary">تحديث الرتبة</button>
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
