@@ -61,21 +61,25 @@
                                     </td>
                                     <td>{{ \Str::limit($post->content, 50) }}</td>
                                     <td>{{ $post->category->name ?? 'غير محدد' }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-success btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('delete')
-                                            <div>
-                                                <button type="submit" class="destroy btn btn-danger">حذف</button>
-                                            </div>
-                                        </form>
-                                    </td>
+                                    @permission('posts.edit')
+                                        <td class="text-center">
+                                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-success btn-xs">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    @endpermission
+                                    @permission('posts.delete')
+                                        <td class="text-center">
+                                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="destroy btn btn-danger">حذف</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
                         </tbody>
@@ -83,9 +87,11 @@
 
 
                 </div>
-                <a href="{{ route('posts.create') }}" class="btn btn-dark">
-                    <i class="fa fa-edit"> اضافه مقاله</i>
-                </a>
+                @permission('posts.create')
+                    <a href="{{ route('posts.create') }}" class="btn btn-dark">
+                        <i class="fa fa-edit"> اضافه مقاله</i>
+                    </a>
+                @endpermission
             </div>
         </div>
     </div>

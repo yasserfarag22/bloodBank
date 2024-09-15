@@ -49,31 +49,35 @@
                                             </span>
                                         @endforeach
                                     </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-
-
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('delete')
-                                            <div>
-                                                <button type="submit" class="destroy btn btn-danger">حذف</button>
-                                            </div>
-                                        </form>
-                                    </td>
+                                    @permission('users-edit')
+                                        <td class="text-center">
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success btn-xs">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endpermission
+                                        @permission('users-delete')
+                                        </td>
+                                        <td class="text-center">
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="destroy btn btn-danger">حذف</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                {{-- @permission('users-create') --}}
                 <a href="{{ route('users.create') }}" class="btn btn-dark">
                     <i class="fa fa-edit"> اضافه مشرف</i>
                 </a>
+                {{-- @endpermission --}}
             </div>
         </div>
     </div>

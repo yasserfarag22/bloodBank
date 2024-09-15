@@ -45,22 +45,26 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->display_name }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-success btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('delete')
-                                            <div>
-                                                <button type="submit" class="destroy btn btn-danger">حذف</button>
-                                            </div>
+                                    @permission('roles-edit')
+                                        <td class="text-center">
+                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-success btn-xs">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    @endpermission
+                                    @permission('roles-delete')
+                                        <td class="text-center">
+                                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="destroy btn btn-danger">حذف</button>
+                                                </div>
 
-                                        </form>
-                                    </td>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
 
@@ -69,9 +73,11 @@
                     </table>
 
                 </div>
-                <a href="{{ route('roles.create') }}" class="btn btn-dark">
-                    <i class="fa fa-edit"> اضافه رتبه</i>
-                </a>
+                @permission('roles-create')
+                    <a href="{{ route('roles.create') }}" class="btn btn-dark">
+                        <i class="fa fa-edit"> اضافه رتبه</i>
+                    </a>
+                @endpermission
             </div>
         </div>
     </div>

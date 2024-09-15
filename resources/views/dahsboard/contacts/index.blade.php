@@ -49,14 +49,16 @@
                                     <td>{{ $contact->email }}</td>
                                     <td>{{ $contact->subject }}</td>
                                     <td>{{ $contact->message }}</td>
-                                    <td class="text-center">
-                                        <form action="{{ route('contacts.delete', $contact->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-xs">حذف</button>
-                                        </form>
-                                    </td>
+                                    @permission('clients-delete')
+                                        <td class="text-center">
+                                            <form action="{{ route('contacts.delete', $contact->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-xs">حذف</button>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
                         </tbody>

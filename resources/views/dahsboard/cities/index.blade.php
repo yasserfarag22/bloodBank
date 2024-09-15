@@ -42,27 +42,33 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $city->name }}</td>
                                     <td>{{ $city->governorate->name ?? 'غير محدد' }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-success btn-xs">
-                                            <i class="fa fa-edit"></i> تعديل
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="{{ route('cities.destroy', $city->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-xs">حذف</button>
-                                        </form>
-                                    </td>
+                                    @permission('cities-edit')
+                                        <td class="text-center">
+                                            <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-success btn-xs">
+                                                <i class="fa fa-edit"></i> تعديل
+                                            </a>
+                                        </td>
+                                    @endpermission
+                                    @permission('cities-delete')
+                                        <td class="text-center">
+                                            <form action="{{ route('cities.destroy', $city->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger btn-xs">حذف</button>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                <a href="{{ route('cities.create') }}" class="btn btn-dark">
-                    <i class="fa fa-plus"></i> إضافة مدينة
-                </a>
+                @permission('cities-create')
+                    <a href="{{ route('cities.create') }}" class="btn btn-dark">
+                        <i class="fa fa-plus"></i> إضافة مدينة
+                    </a>
+                @endpermission
             </div>
         </div>
     </div>

@@ -35,20 +35,62 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [AdminControler::class, 'index']);
-    
-    Route::resource('categories', CategoryController::class);
-    Route::resource('governorates', GovernorateController::class);
-    Route::resource('posts', PostController::class);
-    Route::resource('cities', CityController::class);
-    Route::resource('settings', SettingController::class);
-    Route::resource('clients', ClientController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('roles', RoleController::class);
-    Route::get('status/{id}', [ClientController::class, 'toggleStatus'])->name('client.toggleStatus');
 
-    Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
-    Route::delete('contacts/{id}', [ContactController::class, 'delete'])->name('contacts.delete');
-    Route::get('donations', [DonationController::class, 'index'])->name('donations.index');
+    // ************ * categories * ************ 
+    Route::middleware('permission:categories-list')->group(function () {
+        Route::resource('categories', CategoryController::class);
+    });
+
+     // ************ * governorates * ************ 
+    Route::middleware('permission:governorates-list')->group(function () {
+        Route::resource('governorates', GovernorateController::class);
+    });
+
+   // ************ * posts * ************ 
+    Route::middleware('permission:posts-list')->group(function () {
+        Route::resource('posts', PostController::class);
+    });
+
+     // ************ * cities * ************ 
+    Route::middleware('permission:cities-list')->group(function () {
+        Route::resource('cities', CityController::class);
+    });
+
+  // ************ * settings * ************ 
+    Route::middleware('permission:settings-list')->group(function () {
+        Route::resource('settings', SettingController::class);
+    });
+
+    // ************ * clients * ************ 
+    Route::middleware('permission:clients-list')->group(function () {
+        Route::resource('clients', ClientController::class);
+    });
+   // ************ * Users * ************ 
+    Route::middleware('permission:users-list')->group(function () {
+        Route::resource('users', UserController::class);
+    });
+
+    // ************ * Roles * ************ 
+    Route::middleware('permission:roles-list')->group(function () {
+        Route::resource('roles', RoleController::class);
+    });
+
+    // ************ * toggleStatus * ************ 
+    Route::middleware('permission:clients-edit')->group(function () {
+        Route::get('status/{id}', [ClientController::class, 'toggleStatus'])->name('client.toggleStatus');
+    });
+
+     // ************ * toggleStatus * ************ 
+    Route::middleware('permission:contacts-list')->group(function () {
+        Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
+        Route::delete('contacts/{id}', [ContactController::class, 'delete'])->name('contacts.delete');
+    });
+
+     // ************ * donations * ************ 
+    Route::middleware('permission:donations-list')->group(function () {
+        Route::get('donations', [DonationController::class, 'index'])->name('donations.index');
+    });
+
    
 });
 

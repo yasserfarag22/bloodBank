@@ -18,10 +18,12 @@
                             <i class="fe fe-tag side-menu__icon"></i> الأقسام<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
                         </a>
-                        <ul class="sub-menu">
-                            <li aria-haspopup="true"><a href="{{ route('categories.create') }}" class="slide-item">أضف
-                                    قسم</a></li>
-                        </ul>
+                        @permission('categories-create')
+                            <ul class="sub-menu">
+                                <li aria-haspopup="true"><a href="{{ route('categories.create') }}" class="slide-item">أضف
+                                        قسم</a></li>
+                            </ul>
+                        @endpermission
                     </li>
 
                     <!-- Posts -->
@@ -30,10 +32,12 @@
                             <i class="fe fe-file-text side-menu__icon"></i> المقالات<i
                                 class="fe fe-chevron-down horizontal-icon"></i>
                         </a>
-                        <ul class="sub-menu">
-                            <li aria-haspopup="true"><a href="{{ route('posts.create') }}" class="slide-item">أضف
-                                    مقاله</a></li>
-                        </ul>
+                        @permission('posts-create')
+                            <ul class="sub-menu">
+                                <li aria-haspopup="true"><a href="{{ route('posts.create') }}" class="slide-item">أضف
+                                        مقاله</a></li>
+                            </ul>
+                        @endpermission
                     </li>
 
                     <!-- Governorates -->

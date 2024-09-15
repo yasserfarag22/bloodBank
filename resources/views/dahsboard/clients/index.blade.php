@@ -62,20 +62,24 @@
                                     <td>{{ $client->bloodType->name }}</td>
                                     <td>{{ $client->date_of_birth }}</td>
                                     <td>{{ $client->last_donation_date }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('client.toggleStatus', $client->id) }}"
-                                            class="btn btn-{{ $client->is_active == 1 ? 'success' : 'danger' }}">
-                                            {{ $client->is_active == 1 ? 'الغاء التفعيل' : 'تفعيل' }}
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="{{ route('clients.destroy', $client->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-xs">حذف</button>
-                                        </form>
-                                    </td>
+                                    @permission('clients-edit')
+                                        <td class="text-center">
+                                            <a href="{{ route('client.toggleStatus', $client->id) }}"
+                                                class="btn btn-{{ $client->is_active == 1 ? 'success' : 'danger' }}">
+                                                {{ $client->is_active == 1 ? 'الغاء التفعيل' : 'تفعيل' }}
+                                            </a>
+                                        </td>
+                                    @endpermission
+                                    @permission('clients-delete')
+                                        <td class="text-center">
+                                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-xs">حذف</button>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
                         </tbody>

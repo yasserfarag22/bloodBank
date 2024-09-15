@@ -34,8 +34,12 @@
                             <tr>
                                 <th>#</th>
                                 <th>القسم</th>
+
                                 <th class="text-center">تعديل</th>
+
+
                                 <th class="text-center">حذف</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -43,23 +47,27 @@
                                 <tr id="removable{{ $category->id }}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $category->name }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('categories.edit', $category->id) }}"
-                                            class="btn btn-success btn-xs">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
-                                            class="form-horizontal">
-                                            @csrf
-                                            @method('delete')
-                                            <div>
-                                                <button type="submit" class="destroy btn btn-danger">حذف</button>
-                                            </div>
+                                    @permission('categories-edit')
+                                        <td class="text-center">
+                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                                class="btn btn-success btn-xs">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    @endpermission
+                                    @permission('categories-delete')
+                                        <td class="text-center">
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                                                class="form-horizontal">
+                                                @csrf
+                                                @method('delete')
+                                                <div>
+                                                    <button type="submit" class="destroy btn btn-danger">حذف</button>
+                                                </div>
 
-                                        </form>
-                                    </td>
+                                            </form>
+                                        </td>
+                                    @endpermission
                                 </tr>
                             @endforeach
 
@@ -68,9 +76,11 @@
                     </table>
 
                 </div>
-                <a href="{{ route('categories.create') }}" class="btn btn-dark">
-                    <i class="fa fa-edit"> اضافه قسم</i>
-                </a>
+                @permission('categories-create')
+                    <a href="{{ route('categories.create') }}" class="btn btn-dark">
+                        <i class="fa fa-edit"> اضافه قسم</i>
+                    </a>
+                @endpermission
             </div>
         </div>
     </div>

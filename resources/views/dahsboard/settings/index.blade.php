@@ -39,13 +39,14 @@
                             <a href="{{ $setting->wa_link }}" class="text-success" target="_blank">واتساب</a> |
                             <a href="{{ $setting->insta_link }}" class="text-danger" target="_blank">انستجرام</a>
                         </p>
+                        @permission('settings-edit')
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('settings.edit', $setting->id) }}" class="btn btn-success">
+                                    <i class="fa fa-edit"></i> تعديل
+                                </a>
 
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('settings.edit', $setting->id) }}" class="btn btn-success">
-                                <i class="fa fa-edit"></i> تعديل
-                            </a>
-
-                        </div>
+                            </div>
+                        @endpermission
                     </div>
                 </div>
             </div>
